@@ -3,6 +3,8 @@
 import '@mantine/core/styles.css';
 
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
+import AppShellWrapper from './AppShellWrapper';
+import "./globals.css";
 
 export const metadata = {
   title: 'My Mantine app',
@@ -20,7 +22,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider defaultColorScheme="dark">{children}</MantineProvider>
+        <MantineProvider defaultColorScheme="dark">
+          <AppShellWrapper>{children}</AppShellWrapper>
+        </MantineProvider>
       </body>
     </html>
   );
