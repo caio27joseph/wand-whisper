@@ -1,6 +1,6 @@
 'use client';
 
-import { AppShell, Burger, Button } from '@mantine/core';
+import { AppShell, Burger, Button, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 
@@ -23,7 +23,11 @@ export default function AppShellWrapper({ children }: { children: React.ReactNod
                     </Link>
                 </div>
             </AppShell.Header>
-            <AppShell.Main>{children}</AppShell.Main>
+            <AppShell.Main >
+                <Container>
+                    {children}
+                </Container>
+            </AppShell.Main>
         </AppShell>
     );
 }

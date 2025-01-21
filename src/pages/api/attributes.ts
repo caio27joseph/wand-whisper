@@ -1,23 +1,21 @@
+import dbConnect from '@/lib/mongoose';
+import Attribute from '@/models/Attribute';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const attributes = [
-  {
-    name: 'Força',
-    description: 'Irure minim ad incididunt quis in.',
-  },
-  {
-    name: 'Inteligência',
-    description: "Ipsum aliquip ea proident incididunt consectetur ea nisi."
-  }
-];
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
-    // Fetch attributes
-    return res.status(200).json(attributes);
+  if (req.method === 'POST') {
+    try {
+      const { name, description } = req.body;
+
+      const attribute = await Attribute.create({ name, description });
+      res.status(201).json(attribute);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to create attribute' });
+    }
   } else {
-    // Handle unsupported methods
-    res.setHeader('Allow', ['GET']);
-    return res.status(405).end(`Method ${req.method} Not Allowed`);
+    res.setHeader('Allow', ['GET', 'POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
