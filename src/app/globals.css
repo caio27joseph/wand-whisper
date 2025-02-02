@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .variant-ghost {
+    @apply border border-blue-500 bg-blue-500 bg-opacity-5 border-opacity-50 py-4 rounded-md;
+  }
+}
